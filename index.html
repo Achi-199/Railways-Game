@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Railways Game</title>
+		<link rel="shortcut icon" href="pics/screens/thumbnail.png" type="image/x-icon">
+		<link rel="stylesheet" href="styles.css" />
+		<meta name="description" content="Railways logic puzzle game. Build a continuous railway on 5x5 or 7x7 boards and compete on the leaderboard.">
+		<meta property="og:title" content="Railways Game">
+		<meta property="og:description" content="Build and connect tracks before time runs out.">
+		<meta property="og:image" content="https://achi-199.github.io/Railways-Game/pics/screens/thumbnail.png">
+		<meta property="og:type" content="website">
+		<meta name="theme-color" content="#222222">
+		<link rel="preload" as="image" href="pics/tiles/straight_rail.png" />
+		<link rel="preload" as="image" href="pics/tiles/curve_rail.png" />
+		<link rel="preload" as="image" href="pics/tiles/empty.png" />
+		<link rel="preload" as="image" href="pics/tiles/bridge.png" />
+		<link rel="preload" as="image" href="pics/tiles/bridge_rail.png" />
+		<link rel="preload" as="image" href="pics/tiles/mountain.png" />
+		<link rel="preload" as="image" href="pics/tiles/oasis.png" />
+	</head>
+	<body>
+		<!-- Menu Page -->
+		<div id="menu-screen">
+			<h1>RAILWAYS</h1>
+			<input type="text" maxlength="25" id="player-name" placeholder="Who are you?" />
+			<h2>SET THE DIFFICULTY!</h2>
+			<div id="difficulty-selection">
+				<div class="difficulty-option">
+					<button id="easy-btn" class="difficulty-btn">5 X 5</button>
+					<span class="difficulty-label">EASY</span>
+				</div>
+				<div class="difficulty-option">
+					<button id="hard-btn" class="difficulty-btn">7 X 7</button>
+					<span class="difficulty-label">HARD</span>
+				</div>
+			</div>
+
+			<div class="button-row">
+				<button id="rules-btn" class="menu-btn">RULES</button>
+				<button id="leaderboard-btn" class="menu-btn">LEADERBOARD</button>
+	   	</div>
+			<button id="start-game-btn" class="menu-btn" disabled>
+				START GAME
+			</button>
+		</div>
+			<!-- Rules Modal -->
+		<div id="rules-modal" class="modal">
+			<div class="modal-content">
+				<span class="close-rules">&times;</span>
+				<h2>Game Rules</h2>
+				<p>
+					Here are the rules of the game:
+					<ol>
+						<li>Click on empty cells to place railway tracks.</li>
+						<li>Each click rotates the track to fit in the desired direction.</li>
+						<li>Try to connect all the tracks without leaving any loose ends.</li>
+						<li>Complete the track to win, and the timer will stop.</li>
+					</ol>
+				</p>
+			</div>
+		</div>
+		<!-- Leaderboard Modal -->
+		<div id="leaderboard-modal" class="modal">
+			<div class="modal-content">
+				<span class="close-leaderboard">&times;</span>
+				<h2>Leaderboard</h2>
+				<div id="leaderBoard">
+					<div class="insider">
+						<h3>Easy Mode</h3>
+						<ol id="easy-leaderboard"></ol>
+					</div>
+					<div class="insider">
+						<h3>Hard Mode</h3>
+						<ol id="hard-leaderboard"></ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Game Screen -->
+		<div id="game-screen" style="display: none">
+			<div id="player-info">
+				<h1>RAILWAYS</h1>
+				<p>Route Designer: <span id="player-display"></span></p>
+				<p>Elapsed Time: <span id="timer">00:00</span></p>
+			</div>
+			<div id="game-board"></div>
+		</div>
+		<!-- Modal for Win Message -->
+		<div id="win-modal" class="modal">
+			<div class="modal-content">
+				<h2>Congratulations!</h2>
+				<p>You completed the railway in <span id="modal-time">00:00</span>.</p>
+				<h3>Best Score for <span id="difficulty-display"></span> Mode</h3>
+				<p id="best-score">No best score yet!</p>
+				<button id="play-again-btn">Play Again</button>
+			</div>
+		</div>
+
+		<script>
+		if ('serviceWorker' in navigator) {
+		  window.addEventListener('load', () => {
+			navigator.serviceWorker.register('sw.js').catch(err => console.warn('SW reg failed', err));
+		  });
+		}
+		</script>
+		<script src="script.js"></script>
+	</body>
+</html>
